@@ -20,7 +20,8 @@ const route = router.get('/', (req,res,next)=>{
 });
 
 app.use('/pagehome', route);
-server.on('error', onError)
+server.on('error', onError);
+server.on('listening', onListening);
 
 server.listen(port);
 console.log('API rodando na porta ' + port)
@@ -58,4 +59,12 @@ function onError(error){
         default:
             throw error;
     }
+}
+
+function onListening() {
+    const addr = server.address();
+    const bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+    debug('Listening on ' + bind);
 }
