@@ -3,10 +3,11 @@
 const http = require('http');
 const debug = require('debug')('nodestr:server');
 const express = require('express');
+const { normalize } = require('path');
 
 
 const app = express();
-const port = 3000;
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const server = http.createServer(app);
