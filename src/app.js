@@ -4,41 +4,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const router = express.Router();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-const getProducts = router.get('/', (req,res,next)=>{
-    res.status(200).send({
-        tittle: 'Node Store API',
-        version: '0.0.'
-    });
-});
+const indexRoute = require('./routes/indexRouter');
+const productRoute = require('./routes/productRouter')
 
-const postProducts = router.post('/', (req,res,next)=>{
-    res.status(201).json({"message":"Produto criado!"});
-});
-
-const putProducts = router.put('/:id', (req,res,next)=>{
-    const id = req.params.id;
-    res.status(200).send({
-        id: id,
-        item: req.body
-    });
-});
-
-const deleteProduct = router.delete('', (req, res, next)=>{
-    res.status(200).json({"message":"Produto deletado"});
-});
-
-app.use('/', getProducts);
-app.use('/products', postProducts);
-app.use('/products', putProducts);
-app.use('/products', deleteProduct);
+app.use('/', indexRoute);
+app.use('/products', productRoute);
 
 module.exports = app;
-
 
 // STATUS
 // 200 - OK
