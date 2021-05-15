@@ -19,4 +19,4 @@ router.delete('/', (req, res, next)=>{
     res.status(200).json({"message":"Produto deletado"});
 });
 
-module.exports = router;
+module.exports = router; 
